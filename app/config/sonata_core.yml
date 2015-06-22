@@ -1,0 +1,27 @@
+sonata_core: ~
+sonata_user:
+    security_acl: true
+    manager_type: mongodb
+    class:
+        user:         DDD\CoreDomain\User\User
+        group:        Sonata\UserBundle\Document\BaseGroup
+    
+sonata_admin:
+    title:    %project_title% Admin Area
+    security:
+        handler: sonata.admin.security.handler.role
+    dashboard:
+        blocks:
+            - { position: left, type: sonata.admin.block.admin_list }
+            
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        sonata.admin.block.admin_list:
+            contexts:   [admin]
+        sonata.block.service.text:
+            
+doctrine:
+    dbal:
+        types:
+            json: Sonata\Doctrine\Types\JsonType

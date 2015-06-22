@@ -1,0 +1,21 @@
+ddd_frontend.page.create:
+    pattern:  /page/create
+    defaults: { _controller: DDDFrontendBundle:Page:create }
+    requirements:
+        _method: GET
+        
+ddd_frontend.page.view:
+    pattern:  /page/{pageSlug}
+    defaults: { _controller: DDDFrontendBundle:Page:view }
+    requirements:
+        _method: GET
+        
+ddd_frontend.page_home:
+    pattern:  /
+    defaults: 
+        _controller: FrameworkBundle:Redirect:redirect
+        route: ddd_frontend.page.view
+        permanent: false # this is for 301
+        pageSlug: home # you can pass additional attributes
+    requirements:
+        _method: GET

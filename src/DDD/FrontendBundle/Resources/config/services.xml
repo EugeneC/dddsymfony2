@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="sonata.user.admin.group" class="Sonata\UserBundle\Admin\Document\GroupAdmin"></service>
+
+        <service id="sonata.user.admin.user" class="DDD\FrontendBundle\Admin\UserAdmin">
+            <tag name="sonata.admin" manager_type="doctrine_mongodb" group="Users" label="User"/>
+            <argument>sonata.user.admin.user</argument>
+            <argument>DDD\CoreDomain\User\User</argument>
+            <argument>SonataAdminBundle:CRUD</argument>
+            
+            <call method="setUserManager">
+                <argument type="service" id="fos_user.user_manager"/>
+            </call>
+        </service>
+        
+        <service id="sonata.admin.page" class="DDD\FrontendBundle\Admin\PageAdmin">
+            <tag name="sonata.admin" manager_type="doctrine_mongodb" group="Pages" label="Page" />
+            <argument />
+            <argument>DDD\CoreDomain\Page\Page</argument>
+            <argument>SonataAdminBundle:CRUD</argument>
+        </service>
+        
+   </services>
+</container>

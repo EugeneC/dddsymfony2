@@ -3,6 +3,8 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
+        <meta name="description" content="{% block tagDescription %}{% endblock %}" />
+        <meta name="keywords" content="{% block tagKeywords %}{% endblock %}" />
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
