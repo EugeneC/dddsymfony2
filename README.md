@@ -31,3 +31,7 @@ http://getcomposer.org/ or just run the following command:
     ```
     php app/console page:generate;
     ```
+7. User creation
+    ```
+    php app/console fos:user:create --super-admin
+    ```

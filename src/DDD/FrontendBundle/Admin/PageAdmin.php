@@ -28,13 +28,13 @@ class PageAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('title', 'text', array('attr' => array('data' => 'title')))
-            ->add('body', 'textarea', array('attr' => array('data' => 'body')))
-            ->add('slug', 'text', array('attr' => array('data' => 'slug')))
+            ->add('title', 'text', ['attr' => ['data' => 'title']])
+            ->add('body', 'textarea', ['attr' => ['data' => 'body']])
+            ->add('slug', 'text', ['attr' => ['data' => 'slug']])
             ->add('status', new StatusType())
-            ->add('tags', new TagsType());
+            ->add('tags', new TagsType(), ['required' => false]);
 
-        $builder = $formMapper->getFormBuilder();
+        /*$builder = $formMapper->getFormBuilder();
         $builder->addEventListener(
             FormEvents::PRE_SUBMIT, function (FormEvent $event) {
             $data = $event->getData();
@@ -42,19 +42,19 @@ class PageAdmin extends Admin
             if (!$data) {
                 return;
             }
-            var_dump($data);
-            var_dump($form);
+            //var_dump($data);
+            //var_dump($form);
             $page = new Page($data['title'], $data['body'], $data['slug'], new Tags($data['tags']['description'], $data['tags']['keywords']));
             if ($status = $data['status']['name']) {
                 $page->$status();
             }
             $form->setData($page);
-            var_dump($form);
+            //var_dump($form);
             //exit();
 
             $event->setData($page);
         }
-        );
+        );*/
     }
 
     /**
@@ -75,8 +75,8 @@ class PageAdmin extends Admin
     {
         $listMapper
             ->addIdentifier('slug')
-            ->add('title');
-        //->add('status');
+            ->add('title')
+            ->add('status');
     }
 
     /**
@@ -86,10 +86,11 @@ class PageAdmin extends Admin
     {
         $datagridMapper
             ->add('slug');
-        //->add('status');
+            //->add('title')
+            //->add('status');
     }
 
-    public function getNewInstance()
+    /*public function getNewInstance()
     {
         if ($this->hasRequest() && ($uniqid = $this->getRequest()->get('uniqid'))) {
             $data        = $this->getRequest()->request->get($uniqid);
@@ -113,5 +114,5 @@ class PageAdmin extends Admin
         }
 
         return $page;
-    }
+    }*/
 }

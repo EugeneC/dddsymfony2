@@ -24,8 +24,8 @@ class TagsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('description', 'text')
-            ->add('keywords', 'text');
+            ->add('description', 'text', ['required' => false])
+            ->add('keywords', 'text', ['required' => false]);
     }
 
     /**

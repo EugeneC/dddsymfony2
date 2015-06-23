@@ -30,8 +30,8 @@ class StatusType extends AbstractType
                 'attr'       => array('data' => 'status', 'style' => 'width:150px'),
                 'data_class' => null,
                 'choices'    => array(
-                    Statuses::_PUBLISH => Statuses::_PUBLISH,
-                    Statuses::_DRAFT   => Statuses::_DRAFT
+                    Statuses::PUBLISH => Statuses::PUBLISH,
+                    Statuses::DRAFT   => Statuses::DRAFT
                 ),
                 'required'   => true
             )
