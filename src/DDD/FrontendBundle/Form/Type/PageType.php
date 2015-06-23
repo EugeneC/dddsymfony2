@@ -10,10 +10,11 @@ use Symfony\Component\Form\FormInterface;
 
 class PageType extends AbstractType
 {
-    public function getName() {
+    public function getName()
+    {
         return 'page_type';
     }
-    
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -22,22 +23,24 @@ class PageType extends AbstractType
             ->add('slug', 'text')
             ->add('tags', new TagsType());
     }
-    
+
     /**
      * {@inheritdoc}
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'DDD\CoreDomain\Page\Page',
-            'empty_data' => function (FormInterface $form) {
-                return new Page(
-                    $form->get('title')->getData(),
-                    $form->get('body')->getData(),
-                    $form->get('slug')->getData(),
-                    $form->get('tags')->getData()
-                );
-            }
-        ));
+        $resolver->setDefaults(
+            array(
+                'data_class' => 'DDD\CoreDomain\Page\Page',
+                'empty_data' => function (FormInterface $form) {
+                    return new Page(
+                        $form->get('title')->getData(),
+                        $form->get('body')->getData(),
+                        $form->get('slug')->getData(),
+                        $form->get('tags')->getData()
+                    );
+                }
+            )
+        );
     }
 }

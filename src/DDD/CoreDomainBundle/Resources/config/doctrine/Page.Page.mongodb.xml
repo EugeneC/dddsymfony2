@@ -4,13 +4,14 @@
                         xsi:schemaLocation="http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping
                         http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping.xsd">
 
-    <document name="DDD\CoreDomain\Page\Page" collection="Page" repository-class="DDD\CoreDomainBundle\Repository\MongoPageRepository">
-        <field fieldName="id" id="true" />
-        <field fieldName="title" name="title" type="string" />
-        <field fieldName="body" name="body" type="string" />
-        <field fieldName="slug" name="slug" type="string" />
-        <embed-one target-document="DDD\CoreDomain\Page\Tags" field="tags" />
-        <embed-one target-document="DDD\CoreDomain\Page\Status" field="status" />
+    <document name="DDD\CoreDomain\Page\Page" collection="Page"
+              repository-class="DDD\CoreDomainBundle\Repository\MongoPageRepository">
+        <field fieldName="id" id="true"/>
+        <field fieldName="title" name="title" type="string"/>
+        <field fieldName="body" name="body" type="string"/>
+        <field fieldName="slug" name="slug" type="string"/>
+        <embed-one target-document="DDD\CoreDomain\Page\Tags" field="tags"/>
+        <embed-one target-document="DDD\CoreDomain\Page\Status" field="status"/>
     </document>
 
 </doctrine-mongo-mapping>

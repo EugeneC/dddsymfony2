@@ -4,8 +4,8 @@
                         xsi:schemaLocation="http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping
                         http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping.xsd">
 
-   <embedded-document name="DDD\CoreDomain\Page\Status" collection="Status">
-        <field fieldName="name" name="name" type="string" />
+    <embedded-document name="DDD\CoreDomain\Page\Status" collection="Status">
+        <field fieldName="name" name="name" type="string"/>
     </embedded-document>
 
 </doctrine-mongo-mapping>

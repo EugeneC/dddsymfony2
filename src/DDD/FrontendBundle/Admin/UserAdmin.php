@@ -13,7 +13,7 @@ class UserAdmin extends Admin
 {
     protected $baseRouteName = 'DDD\CoreDomain\User\User';
     protected $baseRoutePattern = 'user';
-    
+
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
@@ -25,13 +25,16 @@ class UserAdmin extends Admin
             ->add('locked', 'checkbox', array('required' => false, 'attr' => array('data' => 'locked')))
             ->end()
             ->with('Management')
-            ->add('roles', 'choice', array(
-                'choices' => array(
-                    'ROLE_SUPER_ADMIN' => $this->trans('Super admin')),
+            ->add(
+                'roles', 'choice', array(
+                'choices'  => array(
+                    'ROLE_SUPER_ADMIN' => $this->trans('Super admin')
+                ),
                 'multiple' => true,
                 'expanded' => true,
                 'required' => false
-            ))
+            )
+            )
             ->end();
 
     }
@@ -48,7 +51,7 @@ class UserAdmin extends Admin
             ->add('locked')
             ->add('lastLogin');
     }
-    
+
     /**
      * {@inheritdoc}
      */

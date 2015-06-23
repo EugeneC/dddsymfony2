@@ -5,14 +5,14 @@ namespace DDD\CoreDomain\Page;
 class Status
 {
     protected $name;
-    
+
     /** @var array */
     private static $statuses;
 
     public function __construct($name)
     {
-        if(!isset(static::$statuses)) {
-           static::$statuses = [NULL, Statuses::_PUBLISH, Statuses::_DRAFT];
+        if (!isset(static::$statuses)) {
+            static::$statuses = [null, Statuses::PUBLISH, Statuses::DRAFT];
         }
         if (!in_array($name, static::$statuses)) {
             throw new UnknownStatusException($name);
@@ -24,7 +24,7 @@ class Status
     {
         return $this->name;
     }
-    
+
     public function getName()
     {
         return $this->name;

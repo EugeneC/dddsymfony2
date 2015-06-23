@@ -54,14 +54,15 @@ class StatusToNumberTransformer implements DataTransformerInterface
 
         $issue = $this->om
             ->getRepository('AcmeTaskBundle:Issue')
-            ->findOneBy(array('number' => $number))
-        ;
+            ->findOneBy(array('number' => $number));
 
         if (null === $issue) {
-            throw new TransformationFailedException(sprintf(
-                'An issue with number "%s" does not exist!',
-                $number
-            ));
+            throw new TransformationFailedException(
+                sprintf(
+                    'An issue with number "%s" does not exist!',
+                    $number
+                )
+            );
         }
 
         return $issue;

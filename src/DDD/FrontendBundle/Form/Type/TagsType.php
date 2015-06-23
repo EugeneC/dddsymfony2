@@ -13,10 +13,11 @@ class TagsType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName() {
+    public function getName()
+    {
         return 'tags_type';
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -32,14 +33,16 @@ class TagsType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'DDD\CoreDomain\Page\Tags',
-            'empty_data' => function (FormInterface $form) {
-                return new Tags(
-                    $form->get('description')->getData(),
-                    $form->get('keywords')->getData()
-                );
-            }
-        ));
+        $resolver->setDefaults(
+            array(
+                'data_class' => 'DDD\CoreDomain\Page\Tags',
+                'empty_data' => function (FormInterface $form) {
+                    return new Tags(
+                        $form->get('description')->getData(),
+                        $form->get('keywords')->getData()
+                    );
+                }
+            )
+        );
     }
 }

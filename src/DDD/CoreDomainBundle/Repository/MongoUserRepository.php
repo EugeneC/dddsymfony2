@@ -15,7 +15,7 @@ class MongoUserRepository extends DocumentRepository implements UserRepository
 {
     public function findByIdentity(UserIdentity $userId)
     {
-        return $this->findOneBy(array('id'=>$userId->getValue()));
+        return $this->findOneBy(array('id' => $userId->getValue()));
     }
 
     public function save(User $user)

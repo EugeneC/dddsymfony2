@@ -3,7 +3,9 @@
 namespace DDD\CoreDomain\Page;
 
 /**
- * DDD\CoreDomain\Page\PageService
+ * Class PageService
+ *
+ * @package \DDD\CoreDomain\Page\PageService
  */
 class PageService
 {
@@ -19,34 +21,53 @@ class PageService
     {
         $this->pageRepository = $pageRepository;
     }
-    
-    public function addPublic($title, $body, $slug, $tagDescription, $tagKeywords) {
-        $page = $this->add($title, $body, $slug, $tagDescription, $tagKeywords);
-        $page->publish();
-        $this->pageRepository->save($page);
-    }
-    
-    public function addDraft($title, $body, $slug, $tagDescription, $tagKeywords) {
-        $page = $this->add($title, $body, $slug, $tagDescription, $tagKeywords);
-        $page->draft();
-        $this->pageRepository->save($page);
-    }
-    
-    public function add($title, $body, $slug, $tagDescription, $tagKeywords) {
-        $tags = new Tags($tagDescription, $tagKeywords);
-        $page = new Page(
-            $title, $body, $slug, $tags
+
+    public function add($title, $body, $slug, $status, $tagDescription, $tagKeywords)
+    {
+        $tags   = new Tags($tagDescription, $tagKeywords);
+        $status = new Status($status);
+        $page   = new Page(
+            $title, $body, $slug, $tags, $status
         );
-        
-        return $page;
+        $this->pageRepository->save($page);
     }
-    
-    public function findPublishedBySlug($pageSlug) {
-        $page = $this->pageRepository->findOneBy(array('slug'=>$pageSlug, 'status'=>'public'));
+
+    public function findPublishedBySlug($pageSlug)
+    {
+        $page = $this->pageRepository->findOneBy(['slug' => $pageSlug, 'status' => new Status(Statuses::PUBLISH)]);
         if (!$page) {
             throw new PublishedPageNotFoundException("Published page not found");
         }
-        
+
         return $page;
-    }   
+    }
+
+    public function generateStartPages()
+    {
+        $newPageTitle          = 'New page';
+        $newPageBody           = 'Welcome to New Page';
+        $newPageSlug           = 'new';
+        $newPageTagDescription = null;
+        $newPageTagKeywords    = null;
+
+        $this->add($newPageTitle, $newPageBody, $newPageSlug, Statuses::PUBLISH, $newPageTagDescription, $newPageTagKeywords);
+
+        /** Home page **/
+        $homePageTitle          = 'Home page';
+        $homePageBody           = 'Welcome to Home Page';
+        $homePageSlug           = 'home';
+        $homePageTagDescription = null;
+        $homePageTagKeywords    = null;
+
+        $this->add($homePageTitle, $homePageBody, $homePageSlug, Statuses::PUBLISH, $homePageTagDescription, $homePageTagKeywords);
+
+        /** About page **/
+        $aboutUsPageTitle          = 'About us';
+        $aboutUsPageBody           = 'This is content of the page "ABOUT US"';
+        $aboutUsPageSlug           = 'about-us';
+        $aboutUsPageTagDescription = null;
+        $aboutUsPageTagKeywords    = null;
+
+        $this->add($aboutUsPageTitle, $aboutUsPageBody, $aboutUsPageSlug, Statuses::DRAFT, $aboutUsPageTagDescription, $aboutUsPageTagKeywords);
+    }
 }

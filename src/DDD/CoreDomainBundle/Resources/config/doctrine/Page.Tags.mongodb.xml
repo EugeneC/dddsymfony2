@@ -4,9 +4,9 @@
                         xsi:schemaLocation="http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping
                         http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping.xsd">
 
-   <embedded-document name="DDD\CoreDomain\Page\Tags" collection="Tags">
-        <field fieldName="description" name="description" type="string" />
-        <field fieldName="keywords" name="keywords" type="string" />
+    <embedded-document name="DDD\CoreDomain\Page\Tags" collection="Tags">
+        <field fieldName="description" name="description" type="string"/>
+        <field fieldName="keywords" name="keywords" type="string"/>
     </embedded-document>
 
 </doctrine-mongo-mapping>

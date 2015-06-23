@@ -5,7 +5,6 @@ namespace DDD\CoreDomain\Page;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique;
-//use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * DDD\CoreDomain\Page\Page
@@ -56,20 +55,22 @@ class Page
     /**
      * Construct Page object
      *
-     * @param string  $title
-     * @param string  $body
-     * @param string  $slug
-     * @param string  $tags
+     * @param string $title
+     * @param string $body
+     * @param string $slug
+     * @param Tags $tags
+     * @param Status $status
      */
-    public function __construct($title, $body, $slug, Tags $tags)
+    public function __construct($title, $body, $slug, Tags $tags, Status $status)
     {
-        $this->id = new \MongoId();
-        $this->title = $title;
-        $this->body = $body;
-        $this->slug = $slug;
-        $this->tags = $tags;
+        $this->id     = new \MongoId();
+        $this->title  = $title;
+        $this->body   = $body;
+        $this->slug   = $slug;
+        $this->tags   = $tags;
+        $this->status = $status;
     }
-    
+
     /**
      * Get id
      *
@@ -130,11 +131,13 @@ class Page
         return $this->status;
     }
 
-    public function publish() {
-        $this->status = new Status(Statuses::_PUBLISH);
+    public function publish()
+    {
+        $this->status = new Status(Statuses::PUBLISH);
     }
 
-    public function draft() {
-        $this->status = new Status(Statuses::_DRAFT);
+    public function draft()
+    {
+        $this->status = new Status(Statuses::DRAFT);
     }
 }

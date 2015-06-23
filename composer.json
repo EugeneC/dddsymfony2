@@ -18,9 +18,9 @@
         "sensio/distribution-bundle": "~3.0",
         "sensio/framework-extra-bundle": "~3.0",
         "incenteev/composer-parameter-handler": "~2.0",
-        "doctrine/mongodb-odm": "1.0.0-BETA11",
+        "doctrine/mongodb-odm": "1.0.0-BETA13",
         "doctrine/mongodb-odm-bundle": "3.0.*@dev",
-        "doctrine/mongodb": "1.1.5",
+        "doctrine/mongodb": "1.1.8",
         "sonata-project/admin-bundle": "~2.3",
         "sonata-project/user-bundle": "~2.2@dev",
         "sonata-project/doctrine-mongodb-admin-bundle": "~2.3"

@@ -17,7 +17,7 @@ class MongoPageRepository extends DocumentRepository implements PageRepository
 {
     public function findByIdentity(PageIdentity $pageId)
     {
-        return $this->findOneBy(array('id'=>$pageId->getValue()));
+        return $this->findOneBy(array('id' => $pageId->getValue()));
     }
 
     public function save(Page $page)

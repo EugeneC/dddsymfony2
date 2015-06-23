@@ -10,7 +10,7 @@ class Tags
     public function __construct($description, $keywords)
     {
         $this->description = $description;
-        $this->keywords = $keywords;
+        $this->keywords    = $keywords;
     }
 
     public function getDescription()

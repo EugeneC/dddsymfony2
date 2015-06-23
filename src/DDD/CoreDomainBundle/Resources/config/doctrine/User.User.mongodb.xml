@@ -4,8 +4,9 @@
                         xsi:schemaLocation="http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping
                         http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping.xsd">
 
-    <document name="DDD\CoreDomain\User\User" collection="User" repository-class="DDD\CoreDomainBundle\Repository\MongoUserRepository">
-        <field fieldName="id" id="true" />
+    <document name="DDD\CoreDomain\User\User" collection="User"
+              repository-class="DDD\CoreDomainBundle\Repository\MongoUserRepository">
+        <field fieldName="id" id="true"/>
     </document>
 
 </doctrine-mongo-mapping>

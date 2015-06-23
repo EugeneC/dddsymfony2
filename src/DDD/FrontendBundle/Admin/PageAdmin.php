@@ -15,6 +15,7 @@ use Sonata\AdminBundle\Show\ShowMapper;
 
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormEvent;
+
 /**
  * Class PageAdmin
  */
@@ -22,7 +23,7 @@ class PageAdmin extends Admin
 {
     protected $baseRouteName = 'DDD\CoreDomain\Page\Page';
     protected $baseRoutePattern = 'page';
-    
+
     // Fields to be shown on create/edit forms
     protected function configureFormFields(FormMapper $formMapper)
     {
@@ -32,9 +33,10 @@ class PageAdmin extends Admin
             ->add('slug', 'text', array('attr' => array('data' => 'slug')))
             ->add('status', new StatusType())
             ->add('tags', new TagsType());
-        
+
         $builder = $formMapper->getFormBuilder();
-        $builder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {
+        $builder->addEventListener(
+            FormEvents::PRE_SUBMIT, function (FormEvent $event) {
             $data = $event->getData();
             $form = $event->getForm();
             if (!$data) {
@@ -49,9 +51,10 @@ class PageAdmin extends Admin
             $form->setData($page);
             var_dump($form);
             //exit();
-            
+
             $event->setData($page);
-        });
+        }
+        );
     }
 
     /**
@@ -62,7 +65,7 @@ class PageAdmin extends Admin
         $showMapper
             ->add('slug')
             ->add('title');
-            //->add('status');
+        //->add('status');
     }
 
     /**
@@ -73,7 +76,7 @@ class PageAdmin extends Admin
         $listMapper
             ->addIdentifier('slug')
             ->add('title');
-            //->add('status');
+        //->add('status');
     }
 
     /**
@@ -83,32 +86,32 @@ class PageAdmin extends Admin
     {
         $datagridMapper
             ->add('slug');
-            //->add('status');
+        //->add('status');
     }
-    
+
     public function getNewInstance()
     {
         if ($this->hasRequest() && ($uniqid = $this->getRequest()->get('uniqid'))) {
-            $data = $this->getRequest()->request->get($uniqid);
-            $title =  $data['title'];
-            $body =  $data['body'];
-            $slug =  $data['slug'];
-            $description =  $data['tags']['description'];
-            $keywords =  $data['tags']['keywords'];
-            $status = $data['status']['name'];
+            $data        = $this->getRequest()->request->get($uniqid);
+            $title       = $data['title'];
+            $body        = $data['body'];
+            $slug        = $data['slug'];
+            $description = $data['tags']['description'];
+            $keywords    = $data['tags']['keywords'];
+            $status      = $data['status']['name'];
         } else {
-            $title =  null;
-            $body =  null;
-            $slug =  null;
-            $description =  null;
-            $keywords =  null;
-            $status = null;
+            $title       = null;
+            $body        = null;
+            $slug        = null;
+            $description = null;
+            $keywords    = null;
+            $status      = null;
         }
         $page = new Page($title, $body, $slug, new Tags($description, $keywords));
         if ($status) {
             $page->$status();
         }
-            
+
         return $page;
     }
 }
