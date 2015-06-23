@@ -29,5 +29,5 @@ http://getcomposer.org/ or just run the following command:
     ```
   6.2 Create page with your values
     ```
-    php app/console pages:generate;
+    php app/console page:generate;
     ```
