@@ -8,6 +8,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use DDD\FrontendBundle\Form\DataTransformer\PublishPageTransformer;
 
 class StatusType extends AbstractType
 {
@@ -27,15 +28,17 @@ class StatusType extends AbstractType
         $builder
             ->add(
                 'name', 'choice', array(
-                'attr'       => array('data' => 'status', 'style' => 'width:150px'),
-                'data_class' => null,
-                'choices'    => array(
-                    Statuses::PUBLISH => Statuses::PUBLISH,
-                    Statuses::DRAFT   => Statuses::DRAFT
-                ),
-                'required'   => true
-            )
+                          'attr'           => array('data' => 'status', 'style' => 'width:150px'),
+                          'data_class'     => null,
+                          'choices'        => array(
+                              Statuses::PUBLISH => Statuses::PUBLISH,
+                              Statuses::DRAFT   => Statuses::DRAFT
+                          ),
+                          'required'       => true,
+                          'error_bubbling' => false
+                      )
             );
+        $builder->addViewTransformer(new PublishPageTransformer());
     }
 
     /**
@@ -45,12 +48,8 @@ class StatusType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class' => 'DDD\CoreDomain\Page\Status',
-                'empty_data' => function (FormInterface $form) {
-                    return new Status(
-                        $form->get('name')->getData()
-                    );
-                }
+                'data_class'           => 'DDD\CoreDomain\DTO\PublishPageCommand',
+                'extra_fields_message' => 'This form should not contain extra fields: {{ extra_fields }}'
             )
         );
     }

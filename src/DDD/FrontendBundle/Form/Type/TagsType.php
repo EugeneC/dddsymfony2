@@ -3,10 +3,13 @@
 namespace DDD\FrontendBundle\Form\Type;
 
 use DDD\CoreDomain\Page\Tags;
+use DDD\FrontendBundle\Form\DataTransformer\MetaTagsTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormEvent;
 
 class TagsType extends AbstractType
 {
@@ -26,6 +29,7 @@ class TagsType extends AbstractType
         $builder
             ->add('description', 'text', ['required' => false])
             ->add('keywords', 'text', ['required' => false]);
+        $builder->addViewTransformer(new MetaTagsTransformer());
     }
 
     /**
@@ -35,13 +39,8 @@ class TagsType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class' => 'DDD\CoreDomain\Page\Tags',
-                'empty_data' => function (FormInterface $form) {
-                    return new Tags(
-                        $form->get('description')->getData(),
-                        $form->get('keywords')->getData()
-                    );
-                }
+                'data_class'           => 'DDD\CoreDomain\DTO\AddMetaTagsCommand',
+                'extra_fields_message' => 'This form should not contain extra fields: {{ extra_fields }}'
             )
         );
     }

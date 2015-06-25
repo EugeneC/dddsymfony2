@@ -2,59 +2,42 @@
 
 namespace DDD\FrontendBundle\Admin;
 
-use DDD\CoreDomain\Page\Page;
-use DDD\CoreDomain\Page\Tags;
-use DDD\FrontendBundle\Form\Type\TagsType;
-use DDD\FrontendBundle\Form\Type\StatusType;
-use DDD\FrontendBundle\Form\DataTransformer\StatusToNumberTransformer;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormEvent;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
-
-use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Form\FormEvent;
+use DDD\CoreDomain\Page\Page;
+use DDD\CoreDomain\Page\Tags;
+use DDD\CoreDomain\Page\Status;
+use DDD\CoreDomain\DTO\PublishPageCommand;
+use DDD\CoreDomain\DTO\CreatePageCommand;
+use DDD\FrontendBundle\Form\Type\TagsType;
+use DDD\FrontendBundle\Form\Type\StatusType;
+use DDD\FrontendBundle\Form\Type\PageType;
+use DDD\FrontendBundle\Form\DataTransformer\PageTransformer;
 
 /**
  * Class PageAdmin
  */
 class PageAdmin extends Admin
 {
-    protected $baseRouteName = 'DDD\CoreDomain\Page\Page';
+    protected $baseRouteName = 'DDD\CoreDomain\DTO\CreatePageCommand';
     protected $baseRoutePattern = 'page';
 
     // Fields to be shown on create/edit forms
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('title', 'text', ['attr' => ['data' => 'title']])
-            ->add('body', 'textarea', ['attr' => ['data' => 'body']])
-            ->add('slug', 'text', ['attr' => ['data' => 'slug']])
+            ->add('slug', 'text', ['attr' => ['data' => 'title']])
+            ->add('withBody', 'textarea', ['attr' => ['data' => 'body']])
+            ->add('withTitle', 'text', ['attr' => ['data' => 'slug']])
             ->add('status', new StatusType())
             ->add('tags', new TagsType(), ['required' => false]);
-
-        /*$builder = $formMapper->getFormBuilder();
-        $builder->addEventListener(
-            FormEvents::PRE_SUBMIT, function (FormEvent $event) {
-            $data = $event->getData();
-            $form = $event->getForm();
-            if (!$data) {
-                return;
-            }
-            //var_dump($data);
-            //var_dump($form);
-            $page = new Page($data['title'], $data['body'], $data['slug'], new Tags($data['tags']['description'], $data['tags']['keywords']));
-            if ($status = $data['status']['name']) {
-                $page->$status();
-            }
-            $form->setData($page);
-            //var_dump($form);
-            //exit();
-
-            $event->setData($page);
-        }
-        );*/
+        $builder = $formMapper->getFormBuilder();
+        $builder->addViewTransformer(new PageTransformer($this->modelManager));
     }
 
     /**
@@ -64,7 +47,7 @@ class PageAdmin extends Admin
     {
         $showMapper
             ->add('slug')
-            ->add('title');
+            ->add('withTitle');
         //->add('status');
     }
 
@@ -75,8 +58,8 @@ class PageAdmin extends Admin
     {
         $listMapper
             ->addIdentifier('slug')
-            ->add('title')
-            ->add('status');
+            ->add('withTitle');
+        //->add('withStatus');
     }
 
     /**
@@ -86,33 +69,40 @@ class PageAdmin extends Admin
     {
         $datagridMapper
             ->add('slug');
-            //->add('title')
-            //->add('status');
+        //->add('title')
+        //->add('status');
     }
 
-    /*public function getNewInstance()
+    public function getNewInstance()
     {
         if ($this->hasRequest() && ($uniqid = $this->getRequest()->get('uniqid'))) {
-            $data        = $this->getRequest()->request->get($uniqid);
-            $title       = $data['title'];
-            $body        = $data['body'];
-            $slug        = $data['slug'];
-            $description = $data['tags']['description'];
-            $keywords    = $data['tags']['keywords'];
-            $status      = $data['status']['name'];
+            $data  = $this->getRequest()->request->get($uniqid);
+            $title = $data['withTitle'];
+            $body  = $data['withBody'];
+            $slug  = $data['slug'];
+            //$description = $data['withTags']['description'];
+            //$keywords    = $data['withTags']['keywords'];
+            //$status      = $data['withStatus']['name'];
+            $description  = null;
+            $keywords     = null;
+            $status       = new PublishPageCommand();
+            $status->name = $data['status']['name'];
         } else {
             $title       = null;
             $body        = null;
             $slug        = null;
             $description = null;
             $keywords    = null;
-            $status      = null;
+            $status      = new PublishPageCommand();
         }
-        $page = new Page($title, $body, $slug, new Tags($description, $keywords));
-        if ($status) {
-            $page->$status();
-        }
+        $publishPageCommand = new CreatePageCommand(
+            $title,
+            $body,
+            $slug,
+            new Tags($description, $keywords),
+            $status
+        );
 
-        return $page;
-    }*/
+        return $publishPageCommand;
+    }
 }

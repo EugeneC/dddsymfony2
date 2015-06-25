@@ -72,6 +72,20 @@ class Page
     }
 
     /**
+     * Publish Page
+     *
+     * @param string $title
+     * @param string $body
+     * @param string $slug
+     * @param Tags $tags
+     * @param Status $status
+     */
+    public function publish($title, $body, $slug, Tags $tags, Status $status)
+    {
+        return new self($title, $body, $slug, $tags, $status);
+    }
+
+    /**
      * Get id
      *
      * @return integer $id
@@ -129,15 +143,5 @@ class Page
     public function getStatus()
     {
         return $this->status;
-    }
-
-    public function publish()
-    {
-        $this->status = new Status(Statuses::PUBLISH);
-    }
-
-    public function draft()
-    {
-        $this->status = new Status(Statuses::DRAFT);
     }
 }

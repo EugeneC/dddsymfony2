@@ -27,13 +27,13 @@ class UserAdmin extends Admin
             ->with('Management')
             ->add(
                 'roles', 'choice', array(
-                'choices'  => array(
-                    'ROLE_SUPER_ADMIN' => $this->trans('Super admin')
-                ),
-                'multiple' => true,
-                'expanded' => true,
-                'required' => false
-            )
+                           'choices'  => array(
+                               'ROLE_SUPER_ADMIN' => $this->trans('Super admin')
+                           ),
+                           'multiple' => true,
+                           'expanded' => true,
+                           'required' => false
+                       )
             )
             ->end();
 
