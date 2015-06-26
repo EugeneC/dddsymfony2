@@ -1,7 +1,7 @@
 <?php
 namespace DDD\CoreDomain\DTO;
 
-class CreatePageCommand
+class AddPageCommand
 {
     public $id;
     public $slug;

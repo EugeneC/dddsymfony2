@@ -26,23 +26,23 @@ class PageTransformer implements DataTransformerInterface
         $this->em = $em;
     }
 
-    public function transform($createPageCommand)
+    public function transform($addPageCommand)
     {
-        return $createPageCommand;
+        return $addPageCommand;
     }
 
-    public function reverseTransform($createPageCommand)
+    public function reverseTransform($addPageCommand)
     {
-        if ($createPageCommand === null) {
+        if ($addPageCommand === null) {
             return null;
         }
 
         return new Page(
-            $createPageCommand->withTitle,
-            $createPageCommand->withBody,
-            $createPageCommand->slug,
-            $createPageCommand->tags ? $createPageCommand->tags : new AddMetaTags(),
-            $createPageCommand->status ? $createPageCommand->status : new PublishPageCommand()
+            $addPageCommand->withTitle,
+            $addPageCommand->withBody,
+            $addPageCommand->slug,
+            $addPageCommand->tags ? $addPageCommand->tags : new AddMetaTags(),
+            $addPageCommand->status ? $addPageCommand->status : new PublishPageCommand()
         );
     }
 }

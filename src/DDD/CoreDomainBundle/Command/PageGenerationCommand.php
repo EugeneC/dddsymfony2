@@ -73,7 +73,7 @@ class PageGenerationCommand extends ContainerAwareCommand
         $questionSlug        = $this->addNotEmptyValidator(new Question('Please enter the slug of the page: '));
         $questionStatus      = new ChoiceQuestion(
             'Please enter the status of the page: ',
-            [Statuses::PUBLISH, Statuses::DRAFT],
+            Statuses::getAsArray(),
             Statuses::PUBLISH
         );
         $questionDescription = new Question('Please enter the tag "description" of the page: ');

@@ -12,8 +12,9 @@ use Sonata\AdminBundle\Show\ShowMapper;
 use DDD\CoreDomain\Page\Page;
 use DDD\CoreDomain\Page\Tags;
 use DDD\CoreDomain\Page\Status;
+use DDD\CoreDomain\Page\Statuses;
 use DDD\CoreDomain\DTO\PublishPageCommand;
-use DDD\CoreDomain\DTO\CreatePageCommand;
+use DDD\CoreDomain\DTO\AddPageCommand;
 use DDD\FrontendBundle\Form\Type\TagsType;
 use DDD\FrontendBundle\Form\Type\StatusType;
 use DDD\FrontendBundle\Form\Type\PageType;
@@ -36,8 +37,7 @@ class PageAdmin extends Admin
             ->add('withTitle', 'text', ['attr' => ['data' => 'slug']])
             ->add('status', new StatusType())
             ->add('tags', new TagsType(), ['required' => false]);
-        $builder = $formMapper->getFormBuilder();
-        $builder->addViewTransformer(new PageTransformer($this->modelManager));
+        $formMapper->getFormBuilder()->addViewTransformer(new PageTransformer($this->modelManager));
     }
 
     /**
@@ -47,8 +47,11 @@ class PageAdmin extends Admin
     {
         $showMapper
             ->add('slug')
-            ->add('withTitle');
-        //->add('status');
+            ->add('withTitle', null, ['label' => 'Title'])
+            ->add('status.name', null, ['label' => 'Status'])
+            ->add('withBody', null, ['label' => 'Body'])
+            ->add('tags.description', null, ['label' => 'Description'])
+            ->add('tags.keywords', null, ['label' => 'Keywords']);
     }
 
     /**
@@ -58,8 +61,8 @@ class PageAdmin extends Admin
     {
         $listMapper
             ->addIdentifier('slug')
-            ->add('withTitle');
-        //->add('withStatus');
+            ->add('withTitle', null, ['label' => 'Title'])
+            ->add('status', null, ['label' => 'Status', 'associated_property' => 'name']);
     }
 
     /**
@@ -68,9 +71,20 @@ class PageAdmin extends Admin
     public function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('slug');
-        //->add('title')
-        //->add('status');
+            ->add('slug')
+            ->add('withTitle', null, ['label' => 'Title'])
+            ->add(
+                'status.name',
+                'doctrine_mongo_callback',
+                [
+                    'label'    => 'Status',
+                    'callback' => array($this, 'getWithStatusFilter')
+                ],
+                'choice',
+                [
+                    'choices' => Statuses::getAsArray()
+                ]
+            );
     }
 
     public function getNewInstance()
@@ -95,7 +109,7 @@ class PageAdmin extends Admin
             $keywords    = null;
             $status      = new PublishPageCommand();
         }
-        $publishPageCommand = new CreatePageCommand(
+        $publishPageCommand = new AddPageCommand(
             $title,
             $body,
             $slug,
@@ -104,5 +118,13 @@ class PageAdmin extends Admin
         );
 
         return $publishPageCommand;
+    }
+
+    public function getWithStatusFilter($queryBuilder, $alias, $field, $value)
+    {
+        if ($value['value'] === null) {
+            return;
+        }
+        $queryBuilder->addOr($queryBuilder->expr()->field('status.name')->equals($value['value']));
     }
 }

@@ -27,16 +27,13 @@ class StatusType extends AbstractType
     {
         $builder
             ->add(
-                'name', 'choice', array(
-                          'attr'           => array('data' => 'status', 'style' => 'width:150px'),
+                'name', 'choice', [
+                          'attr'           => ['data' => 'status', 'style' => 'width:150px'],
                           'data_class'     => null,
-                          'choices'        => array(
-                              Statuses::PUBLISH => Statuses::PUBLISH,
-                              Statuses::DRAFT   => Statuses::DRAFT
-                          ),
+                          'choices'        => Statuses::getAsArray(),
                           'required'       => true,
                           'error_bubbling' => false
-                      )
+                      ]
             );
         $builder->addViewTransformer(new PublishPageTransformer());
     }

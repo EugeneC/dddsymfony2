@@ -21,7 +21,7 @@
         <service id="sonata.admin.page" class="DDD\FrontendBundle\Admin\PageAdmin">
             <tag name="sonata.admin" manager_type="doctrine_mongodb" group="Pages" label="Page"/>
             <argument/>
-            <argument>DDD\CoreDomain\DTO\CreatePageCommand</argument>
+            <argument>DDD\CoreDomain\DTO\AddPageCommand</argument>
             <argument>SonataAdminBundle:CRUD</argument>
         </service>
 
