@@ -18,3 +18,4 @@ codeception.yml
 tests/_output/*
 tests/_data/firefox_profile/*
 tests/**/*Tester.php
+tests/_output/*

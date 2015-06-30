@@ -1,0 +1,14 @@
+parameters:
+    mailer_transport:  mail
+    mailer_host:       127.0.0.1
+    mailer_user:       ~
+    mailer_password:   ~
+
+    locale:            en
+    secret:            ThisTokenIsNotSoSecretChangeIt
+
+    mongodb.name: dddsymfony2_test
+    mongodb.server.host: localhost
+    mongodb.server.port: 27017
+    
+    app.base_url: http://test.dddsymfony2.local

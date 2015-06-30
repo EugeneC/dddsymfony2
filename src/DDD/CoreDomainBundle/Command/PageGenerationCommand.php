@@ -92,7 +92,7 @@ class PageGenerationCommand extends ContainerAwareCommand
             $description,
             $keywords
         );
-        $output->writeln('['.(new \DateTime())->format('c').'] Pages successfully generated');
+        $output->writeln('['.(new \DateTime())->format('c').'] Page successfully generated');
     }
 
     public function addNotEmptyValidator($question)

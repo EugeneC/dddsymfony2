@@ -23,7 +23,8 @@
         "doctrine/mongodb": "1.1.8",
         "sonata-project/admin-bundle": "~2.3",
         "sonata-project/user-bundle": "~2.2@dev",
-        "sonata-project/doctrine-mongodb-admin-bundle": "~2.3"
+        "sonata-project/doctrine-mongodb-admin-bundle": "~2.3",
+        "codeception/codeception": "*"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

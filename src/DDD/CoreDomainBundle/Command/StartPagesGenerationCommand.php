@@ -9,11 +9,11 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Class PagesGenerationCommand
+ * Class StartPagesGenerationCommand
  *
  * @package DDD\CoreDomainBundle\Command
  */
-class PagesGenerationCommand extends ContainerAwareCommand
+class StartPagesGenerationCommand extends ContainerAwareCommand
 {
     /**
      * Configure command
@@ -21,7 +21,7 @@ class PagesGenerationCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('pages:generate')
+            ->setName('start:pages:generate')
             ->setDescription('Generates pages for first use');
     }
 
