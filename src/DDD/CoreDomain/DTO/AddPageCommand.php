@@ -9,4 +9,9 @@ class AddPageCommand
     public $withBody;
     public $tags;
     public $status;
+
+    public function __toString()
+    {
+        return ($this->withTitle !== null) ? $this->withTitle : 'New';
+    }
 }

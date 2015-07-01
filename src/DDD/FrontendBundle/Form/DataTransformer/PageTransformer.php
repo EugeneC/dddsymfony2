@@ -5,6 +5,7 @@ use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use DDD\CoreDomain\DTO\PublishPageCommand;
 use DDD\CoreDomain\DTO\AddMetaTagsCommand;
+use DDD\CoreDomain\Page\Page;
 
 class PageTransformer implements DataTransformerInterface
 {

@@ -17,7 +17,7 @@ $I->seeInCollection(
 );
 $I->seeInCollection(
     'Page',
-    ['slug' => 'new']
+    ['slug' => 'contacts']
 );
 $I->seeInCollection(
     'Page',

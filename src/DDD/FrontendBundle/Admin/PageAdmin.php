@@ -25,8 +25,9 @@ use DDD\FrontendBundle\Form\DataTransformer\PageTransformer;
  */
 class PageAdmin extends Admin
 {
-    protected $baseRouteName = 'DDD\CoreDomain\DTO\CreatePageCommand';
+    protected $baseRouteName = 'Page';
     protected $baseRoutePattern = 'page';
+    protected $classnameLabel = 'Page';
 
     // Fields to be shown on create/edit forms
     protected function configureFormFields(FormMapper $formMapper)

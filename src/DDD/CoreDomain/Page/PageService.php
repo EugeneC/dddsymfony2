@@ -44,9 +44,10 @@ class PageService
 
     public function generateStartPages()
     {
-        $newPageTitle          = 'New page';
-        $newPageBody           = 'Welcome to New Page';
-        $newPageSlug           = 'new';
+        /** Contacts page **/
+        $newPageTitle          = 'Contacts page';
+        $newPageBody           = 'Welcome to Contacts Page';
+        $newPageSlug           = 'contacts';
         $newPageTagDescription = null;
         $newPageTagKeywords    = null;
 
