@@ -12,6 +12,6 @@ class AddPageCommand
 
     public function __toString()
     {
-        return ($this->withTitle !== null) ? $this->withTitle : 'New';
+        return (string) $this->withTitle;
     }
 }

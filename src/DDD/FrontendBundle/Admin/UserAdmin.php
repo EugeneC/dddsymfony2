@@ -5,6 +5,7 @@ namespace DDD\FrontendBundle\Admin;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
 
 /**
  * Class UserAdmin
@@ -50,6 +51,17 @@ class UserAdmin extends Admin
             ->add('enabled')
             ->add('locked')
             ->add('lastLogin');
+    }
+
+    /**
+     * @param DatagridMapper $datagridMapper
+     */
+    public function configureDatagridFilters(DatagridMapper $datagridMapper)
+    {
+        $datagridMapper
+            ->add('email')
+            ->add('username')
+            ->add('enabled');
     }
 
     /**
