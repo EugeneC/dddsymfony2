@@ -9,7 +9,7 @@ sonata_user:
 sonata_admin:
     title:    %project_title% Admin Area
     security:
-        handler: sonata.admin.security.handler.role
+        handler: sonata.admin.security.handler.noop
     dashboard:
         blocks:
             - { position: left, type: sonata.admin.block.admin_list }

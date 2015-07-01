@@ -12,30 +12,31 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
  */
 class UserAdmin extends Admin
 {
-    protected $baseRouteName = 'DDD\CoreDomain\User\User';
+    protected $baseRouteName = 'User';
     protected $baseRoutePattern = 'user';
 
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
             ->with('General')
-            ->add('username', 'text', array('attr' => array('data' => 'username')))
-            ->add('email', 'text', array('attr' => array('data' => 'email')))
-            ->add('plainPassword', 'text', array('required' => false, 'attr' => array('data' => 'plainPassword')))
-            ->add('enabled', 'checkbox', array('required' => false, 'attr' => array('data' => 'enabled')))
-            ->add('locked', 'checkbox', array('required' => false, 'attr' => array('data' => 'locked')))
+                ->add('username', 'text', array('attr' => array('data' => 'username')))
+                ->add('email', 'text', array('attr' => array('data' => 'email')))
+                ->add('plainPassword', 'text', array('required' => false, 'attr' => array('data' => 'plainPassword')))
+                ->add('enabled', 'checkbox', array('required' => false, 'attr' => array('data' => 'enabled')))
+                ->add('locked', 'checkbox', array('required' => false, 'attr' => array('data' => 'locked')))
             ->end()
             ->with('Management')
-            ->add(
-                'roles', 'choice', array(
-                           'choices'  => array(
-                               'ROLE_SUPER_ADMIN' => $this->trans('Super admin')
-                           ),
-                           'multiple' => true,
-                           'expanded' => true,
-                           'required' => false
-                       )
-            )
+                ->add(
+                    'roles', 'choice', [
+                               'choices'  => [
+                                   'ROLE_SUPER_ADMIN' => $this->trans('Super admin'),
+                                   'ROLE_ADMIN' => 'Admin'
+                               ],
+                               'multiple' => true,
+                               'expanded' => true,
+                               'required' => false
+                           ]
+                )
             ->end();
 
     }
