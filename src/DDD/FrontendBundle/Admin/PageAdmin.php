@@ -37,7 +37,7 @@ class PageAdmin extends Admin
             ->add('withTitle', 'text', ['attr' => ['data' => 'slug']])
             ->add('status', new StatusType())
             ->add('tags', new TagsType(), ['required' => false]);
-        $formMapper->getFormBuilder()->addViewTransformer(new PageTransformer($this->modelManager));
+        $formMapper->getFormBuilder()->addViewTransformer(new PageTransformer());
     }
 
     /**
@@ -89,35 +89,13 @@ class PageAdmin extends Admin
 
     public function getNewInstance()
     {
-        if ($this->hasRequest() && ($uniqid = $this->getRequest()->get('uniqid'))) {
-            $data  = $this->getRequest()->request->get($uniqid);
-            $title = $data['withTitle'];
-            $body  = $data['withBody'];
-            $slug  = $data['slug'];
-            //$description = $data['withTags']['description'];
-            //$keywords    = $data['withTags']['keywords'];
-            //$status      = $data['withStatus']['name'];
-            $description  = null;
-            $keywords     = null;
-            $status       = new PublishPageCommand();
-            $status->name = $data['status']['name'];
-        } else {
-            $title       = null;
-            $body        = null;
-            $slug        = null;
-            $description = null;
-            $keywords    = null;
-            $status      = new PublishPageCommand();
-        }
-        $publishPageCommand = new AddPageCommand(
-            $title,
-            $body,
-            $slug,
-            new Tags($description, $keywords),
-            $status
+        return new AddPageCommand(
+            null,
+            null,
+            null,
+            new Tags(null, null),
+            new PublishPageCommand()
         );
-
-        return $publishPageCommand;
     }
 
     public function getWithStatusFilter($queryBuilder, $alias, $field, $value)
