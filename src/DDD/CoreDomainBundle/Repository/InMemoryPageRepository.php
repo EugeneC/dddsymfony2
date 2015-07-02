@@ -4,13 +4,22 @@ namespace DDD\CoreDomainBundle\Repository;
 
 use DDD\CoreDomain\Page\Page;
 use DDD\CoreDomain\Page\PageIdentity;
-use DDD\CoreDomain\Page\PageRepository;
+use DDD\CoreDomain\Page\PageRepositoryInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class InMemoryPageRepository implements PageRepository
+/**
+ * Class InMemoryPageRepository
+ *
+ * @package DDD\CoreDomainBundle\Repository
+ * @SuppressWarnings("unused")
+ */
+class InMemoryPageRepository implements PageRepositoryInterface
 {
     private $pages;
 
+    /**
+     * Generate predefined pages
+     */
     public function __construct()
     {
         $this->pages[] = new Page(
@@ -21,6 +30,12 @@ class InMemoryPageRepository implements PageRepository
         );
     }
 
+    /**
+     * @param PageIdentity $pageId
+     *
+     * @return Page
+     * @throws NotFoundHttpException
+     */
     public function findByIdentity(PageIdentity $pageId)
     {
         foreach ($this->pages as $page) {
@@ -32,6 +47,12 @@ class InMemoryPageRepository implements PageRepository
         throw new NotFoundHttpException('Not Found');
     }
 
+    /**
+     * @param string $slug
+     *
+     * @return Page
+     * @throws NotFoundHttpException
+     */
     public function findBySlug($slug)
     {
         foreach ($this->pages as $page) {
@@ -43,16 +64,36 @@ class InMemoryPageRepository implements PageRepository
         throw new NotFoundHttpException('Not Found');
     }
 
+    /**
+     * @return array
+     */
     public function findAll()
     {
         return $this->pages;
     }
 
+    /**
+     * @param Page $page
+     */
     public function add(Page $page)
     {
     }
 
+    /**
+     * @param Page $page
+     *
+     * @return mixed
+     */
     public function remove(Page $page)
+    {
+    }
+
+    /**
+     * @param Page $page
+     *
+     * @return mixed
+     */
+    public function save(Page $page)
     {
     }
 }

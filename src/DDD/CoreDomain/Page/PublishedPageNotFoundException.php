@@ -2,8 +2,13 @@
 
 namespace DDD\CoreDomain\Page;
 
-use DDD\CoreDomain\SharedException\Exception;
+use DDD\CoreDomain\SharedException\ExceptionInterface;
 
-class PublishedPageNotFoundException extends \Exception implements Exception
+/**
+ * Class PublishedPageNotFoundException
+ *
+ * @package DDD\CoreDomain\Page
+ */
+class PublishedPageNotFoundException extends \Exception implements ExceptionInterface
 {
 }

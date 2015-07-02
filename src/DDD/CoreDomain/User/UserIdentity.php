@@ -1,13 +1,13 @@
 <?php
 
-namespace DDD\CoreDomain\Page;
+namespace DDD\CoreDomain\User;
 
 /**
- * Class PageIdentity
+ * Class UserIdentity
  *
- * @package DDD\CoreDomain\Page
+ * @package DDD\CoreDomain\User
  */
-class PageIdentity
+class UserIdentity
 {
     private $value;
 

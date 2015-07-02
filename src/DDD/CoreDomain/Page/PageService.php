@@ -5,23 +5,31 @@ namespace DDD\CoreDomain\Page;
 /**
  * Class PageService
  *
- * @package \DDD\CoreDomain\Page\PageService
+ * @package DDD\CoreDomain\Page
  */
 class PageService
 {
     /**
-     * @var \DDD\CoreDomain\Page\PageRepository
+     * @var \DDD\CoreDomain\Page\PageRepositoryInterface
      */
     protected $pageRepository;
 
     /**
-     * @param \DDD\CoreDomain\Page\PageRepository $pageRepository
+     * @param \DDD\CoreDomain\Page\PageRepositoryInterface $pageRepository
      */
-    public function __construct(PageRepository $pageRepository)
+    public function __construct(PageRepositoryInterface $pageRepository)
     {
         $this->pageRepository = $pageRepository;
     }
 
+    /**
+     * @param string $title
+     * @param string $body
+     * @param string $slug
+     * @param string $status
+     * @param string $tagDescription
+     * @param string $tagKeywords
+     */
     public function add($title, $body, $slug, $status, $tagDescription, $tagKeywords)
     {
         $tags   = new Tags($tagDescription, $tagKeywords);
@@ -32,6 +40,12 @@ class PageService
         $this->pageRepository->save($page);
     }
 
+    /**
+     * @param string $pageSlug
+     *
+     * @return Page
+     * @throws PublishedPageNotFoundException
+     */
     public function findPublishedBySlug($pageSlug)
     {
         $page = $this->pageRepository->findOneBy(['slug' => $pageSlug, 'status' => new Status(Statuses::PUBLISH)]);
@@ -42,6 +56,9 @@ class PageService
         return $page;
     }
 
+    /**
+     * Generate predefined pages
+     */
     public function generateStartPages()
     {
         /** Contacts page **/

@@ -1,11 +1,7 @@
 <?php
-
 namespace DDD\FrontendBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Response;
-use DDD\CoreDomain\Page\Page;
-use DDD\CoreDomain\Page\Tags;
 
 class PageController extends Controller
 {

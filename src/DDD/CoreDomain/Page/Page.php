@@ -10,8 +10,7 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 class Page
 {
     /**
-     * @var MongoId $id
-     *
+     * @ODM\MongoId $id
      */
     protected $id;
 
@@ -23,7 +22,7 @@ class Page
     protected $title;
 
     /**
-     * @var raw $body
+     * @var string $body
      *
      * @ODM\Field(name="body", type="raw")
      */
@@ -52,7 +51,7 @@ class Page
      * @param string $title
      * @param string $body
      * @param string $slug
-     * @param Tags $tags
+     * @param Tags   $tags
      * @param Status $status
      */
     public function __construct($title, $body, $slug, Tags $tags, Status $status)
@@ -71,8 +70,10 @@ class Page
      * @param string $title
      * @param string $body
      * @param string $slug
-     * @param Tags $tags
+     * @param Tags   $tags
      * @param Status $status
+     *
+     * @return Page
      */
     public static function publish($title, $body, $slug, Tags $tags, Status $status)
     {
@@ -85,8 +86,10 @@ class Page
      * @param string $title
      * @param string $body
      * @param string $slug
-     * @param Tags $tags
+     * @param Tags   $tags
      * @param Status $status
+     *
+     * @return Page
      */
     public function update($title, $body, $slug, Tags $tags, Status $status)
     {
@@ -122,7 +125,7 @@ class Page
     /**
      * Get body
      *
-     * @return raw $body
+     * @return string $body
      */
     public function getBody()
     {

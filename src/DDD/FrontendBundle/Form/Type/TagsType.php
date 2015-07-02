@@ -1,15 +1,10 @@
 <?php
-
 namespace DDD\FrontendBundle\Form\Type;
 
-use DDD\CoreDomain\Page\Tags;
-use DDD\FrontendBundle\Form\DataTransformer\MetaTagsTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Form\FormEvent;
+use DDD\FrontendBundle\Form\DataTransformer\MetaTagsTransformer;
 
 class TagsType extends AbstractType
 {

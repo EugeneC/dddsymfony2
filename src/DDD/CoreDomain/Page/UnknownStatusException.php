@@ -2,8 +2,13 @@
 
 namespace DDD\CoreDomain\Page;
 
-use DDD\CoreDomain\SharedException\Exception;
+use DDD\CoreDomain\SharedException\ExceptionInterface;
 
-class UnknownStatusException extends \Exception implements Exception
+/**
+ * Class UnknownStatusException
+ *
+ * @package DDD\CoreDomain\Page
+ */
+class UnknownStatusException extends \Exception implements ExceptionInterface
 {
 }

@@ -2,13 +2,21 @@
 
 namespace DDD\CoreDomain\Page;
 
+/**
+ * Class Status
+ *
+ * @package DDD\CoreDomain\Page
+ */
 class Status
 {
     protected $name;
 
     /** @var array */
-    private static $statuses;
+    //private static $statuses;
 
+    /**
+     * @param string $name
+     */
     public function __construct($name)
     {
         /*if (!isset(static::$statuses)) {
@@ -20,11 +28,17 @@ class Status
         $this->name = $name;
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return $this->name;
     }
 
+    /**
+     * @return string
+     */
     public function getName()
     {
         return $this->name;

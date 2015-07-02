@@ -14,10 +14,13 @@ class Configuration implements ConfigurationInterface
 {
     /**
      * {@inheritdoc}
+     * @SuppressWarnings(PHPMD.UnusedLocalVariable)
      */
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
+
+        /** @noinspection PhpUnusedLocalVariableInspection */
         $rootNode    = $treeBuilder->root('ddd_core_domain');
 
         // Here you should define the parameters that are allowed to

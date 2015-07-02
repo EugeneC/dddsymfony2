@@ -3,10 +3,15 @@ namespace DDD\FrontendBundle\Form\DataTransformer;
 
 use Symfony\Component\Form\DataTransformerInterface;
 use Sonata\DoctrineMongoDBAdminBundle\Model\ModelManager;
-use DDD\CoreDomain\DTO\UpdatePageWithStatusCommand;
-use DDD\CoreDomain\DTO\UpdatePageWithMetaTagsCommand;
+use Sonata\AdminBundle\Model\ModelManagerInterface;
 use DDD\CoreDomain\Page\Page;
+use DDD\CoreDomain\DTO\AddPageCommand;
 
+/**
+ * Class PageTransformer
+ *
+ * @package DDD\FrontendBundle\Form\DataTransformer
+ */
 class PageTransformer implements DataTransformerInterface
 {
     /**
@@ -15,18 +20,28 @@ class PageTransformer implements DataTransformerInterface
     private $em;
 
     /**
-     * @param ModelManager $em
+     * @param ModelManagerInterface $em
      */
-    public function __construct(ModelManager $em)
+    public function __construct(ModelManagerInterface $em)
     {
         $this->em = $em;
     }
 
+    /**
+     * @param AddPageCommand $addPageCommand
+     *
+     * @return AddPageCommand
+     */
     public function transform($addPageCommand)
     {
         return $addPageCommand;
     }
 
+    /**
+     * @param AddPageCommand $addPageCommand
+     *
+     * @return Page|null
+     */
     public function reverseTransform($addPageCommand)
     {
         /** @var Page $page */
@@ -40,8 +55,8 @@ class PageTransformer implements DataTransformerInterface
             $addPageCommand->withTitle,
             $addPageCommand->withBody,
             $addPageCommand->slug,
-            $addPageCommand->tags ? $addPageCommand->tags : new UpdatehPageWithMetaTagsCommand(),
-            $addPageCommand->status ? $addPageCommand->status : new UpdatePageWithStatusCommand()
+            $addPageCommand->tags,
+            $addPageCommand->status
         );
     }
 }

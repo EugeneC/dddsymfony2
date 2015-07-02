@@ -2,7 +2,6 @@
 namespace DDD\FrontendBundle\Form\DataTransformer;
 
 use Symfony\Component\Form\DataTransformerInterface;
-use Symfony\Component\Form\Exception\TransformationFailedException;
 use DDD\CoreDomain\Page\Status;
 
 class StatusTransformer implements DataTransformerInterface

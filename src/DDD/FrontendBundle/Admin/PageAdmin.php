@@ -2,16 +2,11 @@
 
 namespace DDD\FrontendBundle\Admin;
 
-use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Form\FormEvent;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
-use DDD\CoreDomain\Page\Page;
-use DDD\CoreDomain\Page\Tags;
-use DDD\CoreDomain\Page\Status;
 use DDD\CoreDomain\Page\Statuses;
 use DDD\CoreDomain\DTO\UpdatePageWithStatusCommand;
 use DDD\CoreDomain\DTO\UpdatePageWithMetaTagsCommand;

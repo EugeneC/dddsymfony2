@@ -6,7 +6,6 @@ use DDD\CoreDomain\Page\Statuses;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Question\ChoiceQuestion;
@@ -60,7 +59,7 @@ class PageGenerationCommand extends ContainerAwareCommand
     }
 
     /**
-     * @param InputInterface $input
+     * @param InputInterface  $input
      * @param OutputInterface $output
      *
      * @return void
@@ -95,6 +94,11 @@ class PageGenerationCommand extends ContainerAwareCommand
         $output->writeln('['.(new \DateTime())->format('c').'] Page successfully generated');
     }
 
+    /**
+     * @param Question $question
+     *
+     * @return mixed
+     */
     public function addNotEmptyValidator($question)
     {
         $question->setMaxAttempts(3);
