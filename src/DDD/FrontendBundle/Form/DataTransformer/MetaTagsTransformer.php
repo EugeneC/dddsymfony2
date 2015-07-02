@@ -7,20 +7,20 @@ use DDD\CoreDomain\Page\Tags;
 
 class MetaTagsTransformer implements DataTransformerInterface
 {
-    public function transform($addMetaTagsCommand)
+    public function transform($updatePageWithMetaTagsCommand)
     {
-        return $addMetaTagsCommand;
+        return $updatePageWithMetaTagsCommand;
     }
 
-    public function reverseTransform($addMetaTagsCommand)
+    public function reverseTransform($updatePageWithMetaTagsCommand)
     {
-        if ($addMetaTagsCommand === null) {
+        if ($updatePageWithMetaTagsCommand === null) {
             return null;
         }
 
         return new Tags(
-            $addMetaTagsCommand->description,
-            $addMetaTagsCommand->keywords
+            $updatePageWithMetaTagsCommand->description,
+            $updatePageWithMetaTagsCommand->keywords
         );
     }
 }

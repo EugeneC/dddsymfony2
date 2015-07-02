@@ -1,7 +1,7 @@
 <?php
 namespace DDD\CoreDomain\DTO;
 
-class PublishPageCommand
+class UpdatePageWithStatusCommand
 {
     public $name;
 }

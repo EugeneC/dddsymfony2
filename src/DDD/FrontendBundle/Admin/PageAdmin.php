@@ -13,7 +13,8 @@ use DDD\CoreDomain\Page\Page;
 use DDD\CoreDomain\Page\Tags;
 use DDD\CoreDomain\Page\Status;
 use DDD\CoreDomain\Page\Statuses;
-use DDD\CoreDomain\DTO\PublishPageCommand;
+use DDD\CoreDomain\DTO\UpdatePageWithStatusCommand;
+use DDD\CoreDomain\DTO\UpdatePageWithMetaTagsCommand;
 use DDD\CoreDomain\DTO\AddPageCommand;
 use DDD\FrontendBundle\Form\Type\TagsType;
 use DDD\FrontendBundle\Form\Type\StatusType;
@@ -28,17 +29,20 @@ class PageAdmin extends Admin
     protected $baseRouteName = 'Page';
     protected $baseRoutePattern = 'page';
     protected $classnameLabel = 'Page';
+    protected $formOptions = array(
+        'cascade_validation' => true
+    );
 
     // Fields to be shown on create/edit forms
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('slug', 'text', ['attr' => ['data' => 'title']])
-            ->add('withBody', 'textarea', ['attr' => ['data' => 'body']])
-            ->add('withTitle', 'text', ['attr' => ['data' => 'slug']])
+            ->add('slug', 'text')
+            ->add('withTitle', 'text', ['label' => 'Title'])
+            ->add('withBody', 'textarea', ['label' => 'Body'])
             ->add('status', new StatusType())
             ->add('tags', new TagsType(), ['required' => false]);
-        $formMapper->getFormBuilder()->addViewTransformer(new PageTransformer());
+        $formMapper->getFormBuilder()->addViewTransformer(new PageTransformer($this->modelManager));
     }
 
     /**
@@ -94,8 +98,8 @@ class PageAdmin extends Admin
             null,
             null,
             null,
-            new Tags(null, null),
-            new PublishPageCommand()
+            new UpdatePageWithMetaTagsCommand(),
+            new UpdatePageWithStatusCommand()
         );
     }
 

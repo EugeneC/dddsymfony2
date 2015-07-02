@@ -1,0 +1,19 @@
+DDD\CoreDomain\Page\Page:
+    constraints:
+        - Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique:
+            fields: [slug]
+            message: page.slug.alreadyUsed
+    properties:
+        title:
+            - NotBlank: { message: page.title.empty }
+        slug:
+            - NotBlank: { message: page.slug.empty }
+        body:
+            - NotBlank: { message: page.body.empty}
+
+DDD\CoreDomain\Page\Status:
+    properties:
+        name:
+            - NotBlank: { message: status.name.empty }
+            - Choice: { callback: [DDD\CoreDomain\Page\Statuses, getAsArray], message: status.name.badChoice }
+

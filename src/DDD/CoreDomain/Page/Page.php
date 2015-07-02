@@ -3,14 +3,9 @@
 namespace DDD\CoreDomain\Page;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
-use Symfony\Component\Validator\Constraints as Assert;
-use Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique;
 
 /**
  * DDD\CoreDomain\Page\Page
- *
- * @ODM\ChangeTrackingPolicy("DEFERRED_IMPLICIT")
- * //Unique(fields="slug")
  */
 class Page
 {
@@ -38,7 +33,6 @@ class Page
      * @var string $slug
      *
      * @ODM\Field(name="slug", type="string")
-     * //Assert\NotBlank()
      */
     protected $slug;
 
@@ -80,9 +74,29 @@ class Page
      * @param Tags $tags
      * @param Status $status
      */
-    public function publish($title, $body, $slug, Tags $tags, Status $status)
+    public static function publish($title, $body, $slug, Tags $tags, Status $status)
     {
         return new self($title, $body, $slug, $tags, $status);
+    }
+
+    /**
+     * Update Page
+     *
+     * @param string $title
+     * @param string $body
+     * @param string $slug
+     * @param Tags $tags
+     * @param Status $status
+     */
+    public function update($title, $body, $slug, Tags $tags, Status $status)
+    {
+        $this->title  = $title;
+        $this->body   = $body;
+        $this->slug   = $slug;
+        $this->tags   = $tags;
+        $this->status = $status;
+
+        return $this;
     }
 
     /**

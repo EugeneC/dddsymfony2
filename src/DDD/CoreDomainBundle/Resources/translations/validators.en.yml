@@ -1,0 +1,13 @@
+page:
+    title:
+        empty: Please enter title
+    slug:
+        empty: Please enter slug
+        alreadyUsed: The slug is already used
+    body:
+        empty: Please enter body
+
+status:
+    name:
+        empty: Status can not be empty
+        badChoice: Please choose correct status

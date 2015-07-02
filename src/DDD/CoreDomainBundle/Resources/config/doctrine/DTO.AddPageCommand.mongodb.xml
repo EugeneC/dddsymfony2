@@ -10,8 +10,8 @@
         <field fieldName="withTitle" name="title" type="string"/>
         <field fieldName="withBody" name="body" type="string"/>
         <field fieldName="slug" name="slug" type="string"/>
-        <embed-one target-document="DDD\CoreDomain\DTO\AddMetaTagsCommand" field="tags"/>
-        <embed-one target-document="DDD\CoreDomain\DTO\PublishPageCommand" field="status"/>
+        <embed-one target-document="DDD\CoreDomain\DTO\UpdatePageWithMetaTagsCommand" field="tags"/>
+        <embed-one target-document="DDD\CoreDomain\DTO\UpdatePageWithStatusCommand" field="status"/>
     </document>
 
 </doctrine-mongo-mapping>

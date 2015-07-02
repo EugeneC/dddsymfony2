@@ -1,7 +1,7 @@
 <?php
 namespace DDD\CoreDomain\DTO;
 
-class AddMetaTagsCommand
+class UpdatePageWithMetaTagsCommand
 {
     public $description;
     public $keywords;

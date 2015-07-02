@@ -39,7 +39,7 @@ class TagsType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class'           => 'DDD\CoreDomain\DTO\AddMetaTagsCommand',
+                'data_class'           => 'DDD\CoreDomain\DTO\UpdatePageWithMetaTagsCommand',
                 'extra_fields_message' => 'This form should not contain extra fields: {{ extra_fields }}'
             )
         );

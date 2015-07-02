@@ -11,12 +11,12 @@ class Status
 
     public function __construct($name)
     {
-        if (!isset(static::$statuses)) {
+        /*if (!isset(static::$statuses)) {
             static::$statuses = [null, Statuses::PUBLISH, Statuses::DRAFT];
         }
         if (!in_array($name, static::$statuses)) {
             throw new UnknownStatusException($name);
-        }
+        }*/
         $this->name = $name;
     }
 
