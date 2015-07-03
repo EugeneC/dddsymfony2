@@ -23,24 +23,6 @@ class PageService
     }
 
     /**
-     * @param string $title
-     * @param string $body
-     * @param string $slug
-     * @param string $status
-     * @param string $tagDescription
-     * @param string $tagKeywords
-     */
-    public function add($title, $body, $slug, $status, $tagDescription, $tagKeywords)
-    {
-        $tags   = new Tags($tagDescription, $tagKeywords);
-        $status = new Status($status);
-        $page   = new Page(
-            $title, $body, $slug, $tags, $status
-        );
-        $this->pageRepository->save($page);
-    }
-
-    /**
      * @param string $pageSlug
      *
      * @return Page
@@ -87,5 +69,23 @@ class PageService
         $aboutUsPageTagKeywords    = null;
 
         $this->add($aboutUsPageTitle, $aboutUsPageBody, $aboutUsPageSlug, Statuses::DRAFT, $aboutUsPageTagDescription, $aboutUsPageTagKeywords);
+    }
+
+    /**
+     * @param string $title
+     * @param string $body
+     * @param string $slug
+     * @param string $status
+     * @param string $tagDescription
+     * @param string $tagKeywords
+     */
+    public function add($title, $body, $slug, $status, $tagDescription, $tagKeywords)
+    {
+        $tags   = new Tags($tagDescription, $tagKeywords);
+        $status = new Status($status);
+        $page   = new Page(
+            $title, $body, $slug, $tags, $status
+        );
+        $this->pageRepository->save($page);
     }
 }

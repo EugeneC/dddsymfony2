@@ -14,11 +14,12 @@ class Statuses
 
     /**
      * Get values as array
+     *
      * @return array
      */
     public static function getAsArray()
     {
-        return  [
+        return [
             Statuses::PUBLISH => Statuses::PUBLISH,
             Statuses::DRAFT   => Statuses::DRAFT
         ];

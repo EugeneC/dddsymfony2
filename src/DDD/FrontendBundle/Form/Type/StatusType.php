@@ -3,10 +3,10 @@
 namespace DDD\FrontendBundle\Form\Type;
 
 use DDD\CoreDomain\Page\Statuses;
+use DDD\FrontendBundle\Form\DataTransformer\StatusTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use DDD\FrontendBundle\Form\DataTransformer\StatusTransformer;
 
 /**
  * Class StatusType
@@ -36,7 +36,7 @@ class StatusType extends AbstractType
                           'choices'        => Statuses::getAsArray(),
                           'required'       => true,
                           'error_bubbling' => false,
-                          'label' => false
+                          'label'          => false
                       ]
             );
         $builder->addViewTransformer(new StatusTransformer());

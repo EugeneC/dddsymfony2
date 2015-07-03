@@ -3,9 +3,9 @@
 namespace DDD\FrontendBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
-use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\UserBundle\Document\UserManager;
 
 /**
@@ -21,24 +21,24 @@ class UserAdmin extends Admin
     {
         $formMapper
             ->with('General')
-                ->add('username', 'text', array('attr' => array('data' => 'username')))
-                ->add('email', 'text', array('attr' => array('data' => 'email')))
-                ->add('plainPassword', 'text', array('required' => false, 'attr' => array('data' => 'plainPassword')))
-                ->add('enabled', 'checkbox', array('required' => false, 'attr' => array('data' => 'enabled')))
-                ->add('locked', 'checkbox', array('required' => false, 'attr' => array('data' => 'locked')))
+            ->add('username', 'text', array('attr' => array('data' => 'username')))
+            ->add('email', 'text', array('attr' => array('data' => 'email')))
+            ->add('plainPassword', 'text', array('required' => false, 'attr' => array('data' => 'plainPassword')))
+            ->add('enabled', 'checkbox', array('required' => false, 'attr' => array('data' => 'enabled')))
+            ->add('locked', 'checkbox', array('required' => false, 'attr' => array('data' => 'locked')))
             ->end()
             ->with('Management')
-                ->add(
-                    'roles', 'choice', [
-                               'choices'  => [
-                                   'ROLE_SUPER_ADMIN' => $this->trans('Super admin'),
-                                   'ROLE_ADMIN' => 'Admin'
-                               ],
-                               'multiple' => true,
-                               'expanded' => true,
-                               'required' => false
-                           ]
-                )
+            ->add(
+                'roles', 'choice', [
+                           'choices'  => [
+                               'ROLE_SUPER_ADMIN' => $this->trans('Super admin'),
+                               'ROLE_ADMIN'       => 'Admin'
+                           ],
+                           'multiple' => true,
+                           'expanded' => true,
+                           'required' => false
+                       ]
+            )
             ->end();
 
     }

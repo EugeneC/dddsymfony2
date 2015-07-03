@@ -1,11 +1,11 @@
 <?php
 namespace DDD\FrontendBundle\Form\DataTransformer;
 
-use Symfony\Component\Form\DataTransformerInterface;
-use Sonata\DoctrineMongoDBAdminBundle\Model\ModelManager;
-use Sonata\AdminBundle\Model\ModelManagerInterface;
-use DDD\CoreDomain\Page\Page;
 use DDD\CoreDomain\DTO\AddPageCommand;
+use DDD\CoreDomain\Page\Page;
+use Sonata\AdminBundle\Model\ModelManagerInterface;
+use Sonata\DoctrineMongoDBAdminBundle\Model\ModelManager;
+use Symfony\Component\Form\DataTransformerInterface;
 
 /**
  * Class PageTransformer

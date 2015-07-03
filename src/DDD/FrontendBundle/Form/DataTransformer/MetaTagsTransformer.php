@@ -1,8 +1,8 @@
 <?php
 namespace DDD\FrontendBundle\Form\DataTransformer;
 
-use Symfony\Component\Form\DataTransformerInterface;
 use DDD\CoreDomain\Page\Tags;
+use Symfony\Component\Form\DataTransformerInterface;
 
 /**
  * Class MetaTagsTransformer

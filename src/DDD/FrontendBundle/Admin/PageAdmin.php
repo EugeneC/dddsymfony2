@@ -2,18 +2,18 @@
 
 namespace DDD\FrontendBundle\Admin;
 
+use DDD\CoreDomain\DTO\AddPageCommand;
+use DDD\CoreDomain\DTO\UpdatePageWithMetaTagsCommand;
+use DDD\CoreDomain\DTO\UpdatePageWithStatusCommand;
+use DDD\CoreDomain\Page\Statuses;
+use DDD\FrontendBundle\Form\DataTransformer\PageTransformer;
+use DDD\FrontendBundle\Form\Type\StatusType;
+use DDD\FrontendBundle\Form\Type\TagsType;
 use Sonata\AdminBundle\Admin\Admin;
-use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
-use DDD\CoreDomain\Page\Statuses;
-use DDD\CoreDomain\DTO\UpdatePageWithStatusCommand;
-use DDD\CoreDomain\DTO\UpdatePageWithMetaTagsCommand;
-use DDD\CoreDomain\DTO\AddPageCommand;
-use DDD\FrontendBundle\Form\Type\TagsType;
-use DDD\FrontendBundle\Form\Type\StatusType;
-use DDD\FrontendBundle\Form\DataTransformer\PageTransformer;
 
 /**
  * Class PageAdmin
