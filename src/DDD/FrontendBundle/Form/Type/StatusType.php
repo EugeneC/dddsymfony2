@@ -8,6 +8,11 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use DDD\FrontendBundle\Form\DataTransformer\StatusTransformer;
 
+/**
+ * Class StatusType
+ *
+ * @package DDD\FrontendBundle\Form\Type
+ */
 class StatusType extends AbstractType
 {
     /**

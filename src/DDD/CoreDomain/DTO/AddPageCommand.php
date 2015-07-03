@@ -20,6 +20,6 @@ class AddPageCommand
      */
     public function __toString()
     {
-        return (string)$this->withTitle;
+        return (string) $this->withTitle;
     }
 }

@@ -6,6 +6,11 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use DDD\FrontendBundle\Form\DataTransformer\MetaTagsTransformer;
 
+/**
+ * Class TagsType
+ *
+ * @package DDD\FrontendBundle\Form\Type
+ */
 class TagsType extends AbstractType
 {
     /**

@@ -27,6 +27,8 @@ class StartPagesGenerationCommand extends ContainerAwareCommand
      * @param InputInterface  $input
      * @param OutputInterface $output
      *
+     * @SuppressWarnings("unused")
+     *
      * @return void
      */
     protected function execute(InputInterface $input, OutputInterface $output)

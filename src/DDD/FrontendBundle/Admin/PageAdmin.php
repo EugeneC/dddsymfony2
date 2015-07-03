@@ -13,7 +13,6 @@ use DDD\CoreDomain\DTO\UpdatePageWithMetaTagsCommand;
 use DDD\CoreDomain\DTO\AddPageCommand;
 use DDD\FrontendBundle\Form\Type\TagsType;
 use DDD\FrontendBundle\Form\Type\StatusType;
-use DDD\FrontendBundle\Form\Type\PageType;
 use DDD\FrontendBundle\Form\DataTransformer\PageTransformer;
 
 /**
@@ -87,6 +86,11 @@ class PageAdmin extends Admin
             );
     }
 
+    /**
+     * Get new instance
+     *
+     * @return AddPageCommand
+     */
     public function getNewInstance()
     {
         return new AddPageCommand(
@@ -98,6 +102,15 @@ class PageAdmin extends Admin
         );
     }
 
+    /**
+     * @param \Sonata\DoctrineMongoDBAdminBundle\Datagrid\ProxyQuery $queryBuilder
+     * @param string                                                 $alias
+     * @param string                                                 $field
+     * @param mixed                                                  $value
+     *
+     * @SuppressWarnings("unused")
+     * @SuppressWarnings(PHPMD.UnusedLocalVariable)
+     */
     public function getWithStatusFilter($queryBuilder, $alias, $field, $value)
     {
         if ($value['value'] === null) {

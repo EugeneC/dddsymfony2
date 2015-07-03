@@ -6,6 +6,7 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\UserBundle\Document\UserManager;
 
 /**
  * Class UserAdmin
@@ -14,6 +15,7 @@ class UserAdmin extends Admin
 {
     protected $baseRouteName = 'User';
     protected $baseRoutePattern = 'user';
+    protected $userManager;
 
     protected function configureFormFields(FormMapper $formMapper)
     {
@@ -75,7 +77,7 @@ class UserAdmin extends Admin
     }
 
     /**
-     * @param UserManagerInterface $userManager
+     * @param UserManager $userManager
      */
     public function setUserManager($userManager)
     {
@@ -83,7 +85,7 @@ class UserAdmin extends Admin
     }
 
     /**
-     * @return UserManagerInterface
+     * @return UserManager
      */
     public function getUserManager()
     {

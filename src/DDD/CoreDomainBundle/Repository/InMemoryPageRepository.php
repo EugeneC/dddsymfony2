@@ -38,6 +38,7 @@ class InMemoryPageRepository implements PageRepositoryInterface
      */
     public function findByIdentity(PageIdentity $pageId)
     {
+        /** @var Page $page */
         foreach ($this->pages as $page) {
             if ($pageId == $page->getId()) {
                 return $page;
@@ -55,6 +56,7 @@ class InMemoryPageRepository implements PageRepositoryInterface
      */
     public function findBySlug($slug)
     {
+        /** @var Page $page */
         foreach ($this->pages as $page) {
             if ($slug == $page->getSlug()) {
                 return $page;
