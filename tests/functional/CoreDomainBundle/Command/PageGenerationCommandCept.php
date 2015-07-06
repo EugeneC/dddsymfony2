@@ -11,12 +11,12 @@ $I->runCommand(
     'page:generate',
     [],
     [
-        'title',
-        'body',
-        PAGE_GENERATION_COMMAND_SLUG,
+        TITLE,
+        BODY,
+        SLUG,
         Statuses::PUBLISH,
-        'test description',
-        'key, words, test'
+        DESCRIPTION,
+        KEYWORDS
     ]
 );
 
@@ -25,6 +25,6 @@ $I->seeInCommandOutput('Page successfully generated');
 $I->seeInCollection(
     'Page',
     [
-        'slug' => PAGE_GENERATION_COMMAND_SLUG
+        'slug' => SLUG
     ]
 );

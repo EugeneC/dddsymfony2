@@ -22,7 +22,7 @@ class PageTransformer implements DataTransformerInterface
     /**
      * @param ModelManagerInterface $em
      */
-    public function __construct(ModelManagerInterface $em)
+    public function __construct($em)
     {
         $this->em = $em;
     }
@@ -51,7 +51,7 @@ class PageTransformer implements DataTransformerInterface
             return null;
         }
 
-        return $page->update(
+        return $page->updateContent(
             $addPageCommand->withTitle,
             $addPageCommand->withBody,
             $addPageCommand->slug,

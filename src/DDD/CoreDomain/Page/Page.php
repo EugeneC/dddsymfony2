@@ -56,7 +56,6 @@ class Page
      */
     public function __construct($title, $body, $slug, Tags $tags, Status $status)
     {
-        $this->id     = new \MongoId();
         $this->title  = $title;
         $this->body   = $body;
         $this->slug   = $slug;
@@ -91,7 +90,7 @@ class Page
      *
      * @return Page
      */
-    public function update($title, $body, $slug, Tags $tags, Status $status)
+    public function updateContent($title, $body, $slug, Tags $tags, Status $status)
     {
         $this->title  = $title;
         $this->body   = $body;
