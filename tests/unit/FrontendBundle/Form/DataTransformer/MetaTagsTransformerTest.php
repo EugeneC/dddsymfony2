@@ -14,6 +14,20 @@ use DDD\FrontendBundle\Form\DataTransformer\MetaTagsTransformer;
  */
 class MetaTagsTransformerTest extends Test
 {
+
+    protected $command;
+    protected $tags;
+
+    public function _before()
+    {
+        $this->command = $this->getMockBuilder('DDD\CoreDomain\DTO\UpdatePageWithMetaTagsCommand')
+            ->disableOriginalConstructor()
+            ->getMock();
+        $this->tags    = $this->getMockBuilder('DDD\CoreDomain\Page\Tags')
+            ->disableOriginalConstructor()
+            ->getMock();
+    }
+
     public function testReverseTransformNull()
     {
         $transformer = new MetaTagsTransformer();
@@ -22,23 +36,27 @@ class MetaTagsTransformerTest extends Test
 
     public function testReverseTransformEmptyCommand()
     {
-        $command     = new UpdatePageWithMetaTagsCommand();
-        $transformer = new MetaTagsTransformer();
-        $this->assertEquals(
-            new Tags(null, null),
-            $transformer->reverseTransform($command)
-        );
+        $transformer       = new MetaTagsTransformer();
+        $transfromeredTags = $transformer->reverseTransform($this->command);
+        $this->assertEquals($this->tags->getDescription(), $transfromeredTags->getDescription());
+        $this->assertEquals($this->tags->getKeywords(), $transfromeredTags->getKeywords());
+        $this->assertInstanceOf('DDD\CoreDomain\Page\Tags', $transfromeredTags);
     }
 
     public function testReverseTransformCommand()
     {
-        $command              = new UpdatePageWithMetaTagsCommand();
-        $command->description = DESCRIPTION;
-        $command->keywords    = KEYWORDS;
-        $transformer          = new MetaTagsTransformer();
-        $this->assertEquals(
-            new Tags(DESCRIPTION, KEYWORDS),
-            $transformer->reverseTransform($command)
-        );
+        $this->command->description = DESCRIPTION;
+        $this->command->keywords    = KEYWORDS;
+        $this->tags
+            ->method('getDescription')
+            ->will($this->returnValue(DESCRIPTION));
+        $this->tags
+            ->method('getKeywords')
+            ->will($this->returnValue(KEYWORDS));
+        $transformer       = new MetaTagsTransformer();
+        $transfromeredTags = $transformer->reverseTransform($this->command);
+        $this->assertEquals($this->tags->getDescription(), $transfromeredTags->getDescription());
+        $this->assertEquals($this->tags->getKeywords(), $transfromeredTags->getKeywords());
+        $this->assertInstanceOf('DDD\CoreDomain\Page\Tags', $transfromeredTags);
     }
 }

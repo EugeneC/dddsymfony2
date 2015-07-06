@@ -15,38 +15,34 @@ use DDD\CoreDomain\Page\Tags;
  */
 class PageTest extends Test
 {
+
+    protected $status;
+    protected $tags;
+
+    public function _before()
+    {
+        $this->status = $this->getMockBuilder('DDD\CoreDomain\Page\Status')
+            ->disableOriginalConstructor()
+            ->getMock();
+        $this->tags   = $this->getMockBuilder('DDD\CoreDomain\Page\Tags')
+            ->disableOriginalConstructor()
+            ->getMock();
+    }
+
     public function testGetters()
     {
-        $page = Page::publish(
-            TITLE,
-            BODY,
-            SLUG,
-            $tags = new Tags(DESCRIPTION, KEYWORDS),
-            $status = new Status(Statuses::PUBLISH)
-        );
+        $page = Page::publish(TITLE, BODY, SLUG, $this->tags, $this->status);
         $this->assertEquals(TITLE, $page->getTitle());
         $this->assertEquals(BODY, $page->getBody());
         $this->assertEquals(SLUG, $page->getSlug());
-        $this->assertEquals($tags, $page->getTags());
-        $this->assertEquals($status, $page->getStatus());
+        $this->assertEquals($this->tags, $page->getTags());
+        $this->assertEquals($this->status, $page->getStatus());
     }
 
     public function testFactoryMethods()
     {
-        $content = [
-            TITLE_UPDATED,
-            BODY_UPDATED,
-            SLUG_UPDATED,
-            new Tags(DESCRIPTION_UPDATED, KEYWORDS_UPDATED),
-            new Status(Statuses::DRAFT)
-        ];
-        $oldPage = Page::publish(
-            TITLE,
-            BODY,
-            SLUG,
-            new Tags(DESCRIPTION, KEYWORDS),
-            new Status(Statuses::PUBLISH)
-        );
+        $content = [TITLE_UPDATED, BODY_UPDATED, SLUG_UPDATED, $this->tags, $this->status];
+        $oldPage = Page::publish(TITLE, BODY, SLUG, $this->tags, $this->status);
         $this->assertEquals(
             call_user_func_array('DDD\CoreDomain\Page\Page::publish', $content),
             call_user_func_array([$oldPage, 'updateContent'], $content)

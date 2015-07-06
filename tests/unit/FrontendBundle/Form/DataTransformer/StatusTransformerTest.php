@@ -15,6 +15,19 @@ use DDD\FrontendBundle\Form\DataTransformer\StatusTransformer;
  */
 class StatusTranstformerTest extends Test
 {
+    protected $command;
+    protected $status;
+
+    public function _before()
+    {
+        $this->command = $this->getMockBuilder('DDD\CoreDomain\DTO\UpdatePageWithStatusCommand')
+            ->disableOriginalConstructor()
+            ->getMock();
+        $this->status  = $this->getMockBuilder('DDD\CoreDomain\Page\Status')
+            ->disableOriginalConstructor()
+            ->getMock();
+    }
+
     public function testReverseTransformNull()
     {
         $transformer = new StatusTransformer();
@@ -23,22 +36,21 @@ class StatusTranstformerTest extends Test
 
     public function testReverseTransformEmptyCommand()
     {
-        $command     = new UpdatePageWithStatusCommand();
-        $transformer = new StatusTransformer();
-        $this->assertEquals(
-            new Status(null),
-            $transformer->reverseTransform($command)
-        );
+        $transformer         = new StatusTransformer();
+        $transfromeredStatus = $transformer->reverseTransform($this->command);
+        $this->assertEquals($this->status->getName(), $transfromeredStatus->getName());
+        $this->assertInstanceOf('DDD\CoreDomain\Page\Status', $transfromeredStatus);
     }
 
     public function testReverseTransformCommand()
     {
-        $command       = new UpdatePageWithStatusCommand();
-        $command->name = Statuses::PUBLISH;
-        $transformer   = new StatusTransformer();
-        $this->assertEquals(
-            new Status(Statuses::PUBLISH),
-            $transformer->reverseTransform($command)
-        );
+        $this->command->name = Statuses::PUBLISH;
+        $transformer         = new StatusTransformer();
+        $this->status
+            ->method('getName')
+            ->will($this->returnValue(Statuses::PUBLISH));
+        $transfromeredStatus = $transformer->reverseTransform($this->command);
+        $this->assertEquals($this->status->getName(), $transfromeredStatus->getName());
+        $this->assertInstanceOf('DDD\CoreDomain\Page\Status', $transfromeredStatus);
     }
 }
